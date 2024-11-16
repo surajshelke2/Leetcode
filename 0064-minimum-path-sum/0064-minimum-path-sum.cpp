@@ -5,7 +5,7 @@ public:
         int n = grid.size();
         int m = grid[0].size();
        
-        vector<vector<int>>dp(n,vector<int>(m+1,0));
+        vector<vector<int>>dp(n,vector<int>(m,0));
         
         dp[0][0] = grid[0][0];
         
