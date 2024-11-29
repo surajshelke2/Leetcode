@@ -1,25 +1,43 @@
 class Solution {
 public:
+    
+    void NGR(vector<int>& num1 , unordered_map<int,int>&store){
+        
+         int j= num1.size()-1;
+        
+        stack<int>st;
+        
+        while(j>=0){
+           
+            while(!st.empty() && st.top() <= num1[j]){
+                
+                 st.pop();
+            }
+            
+           if (st.empty()) {
+                store[num1[j]] = -1;
+            } else {
+               
+                store[num1[j]] = st.top();
+            }
+            
+            st.push(num1[j]);
+            j--;
+        }
+    }
+    
     vector<int> nextGreaterElement(vector<int>& nums1, vector<int>& nums2) {
         
+        unordered_map<int , int>store;
         
-        vector<int> ans ;
+        NGR(nums2,store);
+        
+        vector<int>ans;
         
         for(int i=0;i<nums1.size();i++){
             
-            int greater= -1;
-            for(int j = nums2.size()-1;j>=0;j--){
-                if(nums1[i] == nums2[j]) break;
-                if(nums1[i] < nums2[j]){
-                    
-                    greater = nums2[j];
-                }
-                
-                
-            }
+            ans.push_back(store[nums1[i]]);      
             
-            ans.push_back(greater);
-
         }
         
         return ans;
