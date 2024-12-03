@@ -13,20 +13,19 @@ public:
             
             if(nums[j]==0) zero++;
             
-            if(zero >k){
+            while(zero >k){
                 
-                while(zero > k){
+               
                     
                     if(nums[i]==0) zero--;
                     i++;
-                }
+               
             }
-            
-            if(zero <= k){
+         
                 
                 maxlen = max(maxlen,j-i+1);
                 
-            }
+            
             j++;
         }
         
