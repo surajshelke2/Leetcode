@@ -12,17 +12,14 @@ class Solution {
     int pairWithMaxSum(vector<int> &arr) {
         // Your code goes here
         
-       int n = arr.size();
-        if (n < 2) return 0; // No pairs exist in arrays with fewer than 2 elements
-
-        int maxSum = INT_MIN; // Initialize to the smallest possible value
-        
-        for (int i = 0; i < n - 1; i++) {
-            int sum = arr[i] + arr[i + 1]; // Sum of current and next element
-            maxSum = max(maxSum, sum);  
+        int n=arr.size();
+     long maxi = 0;
+        long currSum = 0;
+        for(int i=0;i<n-1;i++) {
+            currSum = arr[i] + arr[i+1];//calculate two //adjacent element sum,which includes smallest and //2nd smallest 
+            maxi = max(maxi,currSum);//find maximum //two adjacent element sum
         }
-        
-        return maxSum;
+        return maxi;    
     }
 };
 
