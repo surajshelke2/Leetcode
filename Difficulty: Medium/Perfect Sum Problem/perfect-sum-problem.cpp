@@ -2,65 +2,59 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-// } Driver Code Ends
-class Solution{
 
-	public:
-	int mod = 1e9+7;
-	int solve(int *arr , int sum ,int i , int n,vector<vector<int>>&dp){
-	    
-	     if(sum == 0 && i==n ) return 1;
-	     if(i >= n || sum < 0 ) return 0;
-	    
-	    if(dp[i][sum] != -1 ) return dp[i][sum];
-	    
-	    int notTake =  solve(arr, sum , i+1, n,dp);
-	    int take = 0;
-	    
-	    if(sum >= arr[i])
-	        take = solve(arr,sum - arr[i] , i+1 , n,dp );
-	   
-	   
-	    
-	    return dp[i][sum] = (take +notTake )%mod;
-	    
-	    
-	}
-	int perfectSum(int arr[], int n, int sum)
-	{
+// } Driver Code Ends
+class Solution {
+  public:
+  
+    int solve(vector<int>& arr , int target , int ind,vector<vector<int>>&dp){
+        
+        if (ind == arr.size()) return (target == 0) ? 1 : 0;
+
+        
+        if(dp[ind][target] != -1) return dp[ind][target];
+     
+        int exclude = solve(arr, target, ind + 1,dp);
       
-       vector<vector<int>>dp(n+1,vector<int>(sum+1,-1));
-       
-       return solve(arr,sum,0,n,dp);
-	}
-	  
+        int include = (target >= arr[ind]) ? solve(arr, target - arr[ind], ind + 1, dp) : 0;
+
+        return dp[ind][target] = exclude + include;
+        
+    }
+    int perfectSum(vector<int>& arr, int target) {
+        
+       vector<vector<int>> dp(arr.size(), vector<int>(target + 1, -1));
+       return solve(arr,target,0,dp);
+    }
 };
 
 //{ Driver Code Starts.
-int main() 
-{
-   	
-   
-   	int t;
+
+int main() {
+    int t;
     cin >> t;
-    while (t--)
-    {
-        int n, sum;
+    cin.ignore(); // Ignore newline character after t
 
-        cin >> n >> sum;
+    while (t--) {
+        vector<int> arr;
+        int target;
+        string inputLine;
 
-        int a[n];
-        for(int i = 0; i < n; i++)
-        	cin >> a[i];
+        getline(cin, inputLine); // Read the array input as a line
+        stringstream ss(inputLine);
+        int value;
+        while (ss >> value) {
+            arr.push_back(value);
+        }
 
-       
+        cin >> target;
+        cin.ignore(); // Ignore newline character after target input
 
-	    Solution ob;
-	    cout << ob.perfectSum(a, n, sum) << "\n";
-	     
-    
-cout << "~" << "\n";
-}
+        Solution solution;
+        cout << solution.perfectSum(arr, target);
+        cout << "\n~\n";
+    }
+
     return 0;
 }
 
