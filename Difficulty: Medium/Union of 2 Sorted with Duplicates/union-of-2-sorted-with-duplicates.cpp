@@ -12,26 +12,49 @@ class Solution {
     vector<int> findUnion(vector<int> &a, vector<int> &b) {
         // Your code here
         // return vector with correct order of elements
-        
-        set<int>mpp;
-        
-        for(auto it :a){
+        int i=0;
+        int j=0;
+        vector<int>v;
+        while(i<a.size() && j<b.size()){
             
-            mpp.insert(it);
+            
+            if(a[i]==b[j]){
+                
+                if(v.empty() || v.back() != b[j])
+                    v.push_back(a[i]);
+                i++;
+                j++;
+            }
+            else if(a[i] > b[j]){
+                
+               if(v.empty() || v.back() != b[j])
+                    v.push_back(b[j]);
+                j++;
+              
+            }
+            else if(a[i] < b[j]){
+                
+                 if(v.empty() || v.back() != a[i])
+                    v.push_back(a[i]);
+                i++;
+            }
         }
         
-        for(auto it :b){
-            
-            mpp.insert(it);
+        
+        while(i<a.size()){
+             if(v.empty() || v.back() != a[i])
+                    v.push_back(a[i]);
+            i++;
         }
         
-        vector<int>ans;
-        for(auto it : mpp){
-            
-            ans.push_back(it);
+        while(j<b.size()){
+            if(v.empty() || v.back() != b[j])
+                    v.push_back(b[j]);
+            j++;
         }
         
-        return ans;
+        
+        return v;
     }
 };
 
