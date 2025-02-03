@@ -105,36 +105,21 @@ class Solution{
     public:
     //Function to check whether all nodes of a tree have the value 
     //equal to the sum of their child nodes.
-    
-    
-    int dfs(Node * root){
-        
-        if(root == nullptr || (!root->left && !root->right)) return true;
-        
-        int left = (root->left)?root->left->data:0;
-        int right = (root->right)?root->right->data:0;
-        
-        
-        if(root->data != left+right) return false;
-        
-        
-        return dfs(root->left) && dfs(root->right);
-        
-      
-    }
     int isSumProperty(Node *root)
     {
-        
-        
-        
-        
+     // Add your code here
      
+        if((root == nullptr) || (root->left == nullptr && root->right == nullptr)) return 1;
+        
+        int sum =0;
+        
+        if(root->left != nullptr )sum+=root->left->data;
+        if(root->right != nullptr) sum+=root->right->data;
         
         
-        return dfs(root)?1:0;
+        return (root->data == sum && isSumProperty(root->left) && isSumProperty(root->right));
         
-        
-    
+          
     }
 };
 
