@@ -10,35 +10,31 @@ class Solution {
     vector<int> bfsOfGraph(vector<vector<int>> &adj) {
         // Code here
         
-        queue<int>q;
+        int V = adj.size();
         
+        vector<bool>v(V,false);
         
         vector<int>ans;
+        v[0] = true;
+        
+        queue<int>q;
+        
         q.push(0);
         
-        vector<bool>visited(adj.size(),false);
-        
-        visited[0] = true;
         while(!q.empty()){
             
-            
-            int size = q.size();
             int node = q.front();
+            ans.push_back(node);
             q.pop();
             
-            ans.push_back(node);
-            
-            for(auto it : adj[node]){
+            for(int ne : adj[node]){
                 
-                if(!visited[it]){
-                    visited[it] = true;
-                    q.push(it);
+                if(!v[ne]){
                     
+                    v[ne] = true;
+                    q.push(ne);
                 }
             }
-            
-            
-           
         }
         
         
