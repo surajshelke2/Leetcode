@@ -6,49 +6,60 @@ using namespace std;
 // } Driver Code Ends
 class Solution {
   public:
-    // Function to return list containing vertices in Topological order.\
-    
-    void dfs(int node , vector<vector<int>>& adj , vector<bool>& visited,stack<int>&st){
-        
-         visited[node] = true;
-         
-         for(auto it : adj[node]){
-             
-             if(!visited[it]){
-                 
-                 dfs(it,adj,visited,st);
-             }
-         }
-         
-         st.push(node);
-         
-         
-    }
+    // Function to return list containing vertices in Topological order.
     vector<int> topologicalSort(vector<vector<int>>& adj) {
-        // Your code here44
-        
-        
+        // Your code here
         int v = adj.size();
-        vector<bool>visited(v,false);
-        
-        stack<int>st;
+        queue<int>q;
         vector<int>ans;
+        vector<int>degree(v,0);
+
         for(int i=0;i<v;i++){
             
-            if(!visited[i]){
-                
-                dfs(i,adj,visited,st);
+            for(auto it : adj[i]){
+  
+                degree[it]++;
             }
         }
         
+        // put in the queue
+       for(int i=0;i<v;i++){
+           
+           if(degree[i]==0){
+               
+               q.push(i); 
+
+           }
+       }
+       
+       
+       while(!q.empty()){
+           
+           int node = q.front();
+           q.pop();
+           
+           ans.push_back(node);
+           
+           for(auto it : adj[node]){
+               
+               degree[it]--;
+               
+               if(degree[it]==0){
+                   
+                   q.push(it);
+               }
+           }
+           
+       }
+       
+       
+       return ans;
         
-        while(!st.empty()){
-            
-            ans.push_back(st.top());
-            st.pop();
-        }
         
-        return ans;
+        
+        
+        
+        
     }
 };
 
