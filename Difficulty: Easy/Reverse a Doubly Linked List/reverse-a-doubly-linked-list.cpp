@@ -70,30 +70,22 @@ class Solution {
     // Function to reverse a doubly linked list
     DLLNode* reverseDLL(DLLNode* head) {
         
-        if(!head) return nullptr;
         
-        
-        DLLNode * p = nullptr;
-        
-        while(head->next != nullptr){
+        DLLNode* prev = nullptr;
+        DLLNode * curr = head;
+        while(curr){
             
+            DLLNode * next = curr->next;
             
-            p = head;
-            
-            DLLNode *prev = head->prev;
-            DLLNode *next = head->next;
-            
-            head->next = prev;
-            head->prev = next;
-            
-            head = next;
+            curr->next = prev;
+            if(next)
+                curr->prev = next;
+            prev = curr;
+            curr = next;
             
         }
         
-        head->next = p;
-        head->prev = nullptr;
-        
-        return head;
+        return prev;
     }
 };
 
