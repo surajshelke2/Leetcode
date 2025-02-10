@@ -8,48 +8,19 @@ using namespace std;
 // User function template for C++
 class Solution {
   public:
-    int findKRotation(vector<int> &nums) {
+    int findKRotation(vector<int> &arr) {
         // Code Here
         
-        
-        int s =0;
-        int e = nums.size()-1;
-        int ind = -1;
-        int ans = INT_MAX;
-        while(s<=e){
+        if(arr[0]<=arr[arr.size()-1]) return 0;
+       
+        for(int i=1;i<arr.size();i++){
             
-            int mid = s + (e-s)/2;
-            
-            if(nums[s] <= nums[mid]){
-                
-                
-                if(nums[s] < ans){
-                    
-                    ans = nums[s];
-                    ind = s;
-                }
-                
-                s = mid+1;
-                
-            }
-            else{
-                
-                
-                if(nums[mid] < ans){
-                    
-                    ans = nums[mid];
-                    ind = mid;
-                }
-                
-                e = mid-1;
-                
-                
-                
-            }
- 
+            if(arr[i-1] > arr[i]) return i;
         }
         
-        return ind;
+        
+        return 0; 
+        
     }
 };
 
