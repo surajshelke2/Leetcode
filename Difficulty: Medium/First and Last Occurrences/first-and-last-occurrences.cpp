@@ -7,75 +7,67 @@ using namespace std;
 // } Driver Code Ends
 class Solution {
   public:
-  
-  
-   int firstOcc(vector<int>& arr , int x){
-       
-       
-       int s =0;
-       int e = arr.size()-1;
+   int firstocc(vector<int>&arr , int s , int e , int x){
        
        int ans = -1;
-       
        while(s<=e){
            
            int mid = s+(e-s)/2;
            
+           
            if(arr[mid]==x){
                
                ans = mid;
-               s = mid+1;
+               e = mid-1;
            }
-           else if(arr[mid]<=x){
+           else if(x< arr[mid]) {
                
-               s = mid+1;
-           }
-           else{
                
                e = mid-1;
+           }else{
+               
+                s = mid+1;               
            }
        }
        
        return ans;
    }
    
-   int lastOcc(vector<int>& arr , int x){
-       
-       
-       int s =0;
-       int e = arr.size()-1;
+   
+   int lastOcc(vector<int>&arr , int s , int e , int x){
        
        int ans = -1;
-       
        while(s<=e){
            
            int mid = s+(e-s)/2;
            
+           
            if(arr[mid]==x){
                
                ans = mid;
-               e  = mid-1;
-           }
-           else if(arr[mid]<=x){
-               
                s = mid+1;
            }
-           else{
+           else if(x< arr[mid]) {
+               
                
                e = mid-1;
+           }else{
+               
+                s = mid+1;               
            }
        }
        
        return ans;
    }
+   
     vector<int> find(vector<int>& arr, int x) {
         // code here
         
+        int first = firstocc(arr,0,arr.size()-1,x);
+        int second = lastOcc(arr,0,arr.size()-1,x);
         
-        int first = firstOcc(arr,x);
-        int last =  lastOcc(arr,x);
         
-        return {last,first};
+        return {first,second};
     }
 };
 
