@@ -7,38 +7,34 @@ using namespace std;
 class Solution {
   public:
   
-  
-    int get(vector<int>& arr,int perh){
+    int getPerHour(vector<int>& arr, int k, int preH){
         
-        int count =0;
-        
+        int total =0;
         
         for(int i=0;i<arr.size();i++){
             
-            count+= ceil((double)arr[i]/perh);
+            total += ceil((double)arr[i] / preH);
+          
         }
         
-        return count;
+        return total;
     }
     int kokoEat(vector<int>& arr, int k) {
-        // Code here
         
         
-        int s =1;
         
-        int e = *max_element(arr.begin(), arr.end());;
+        int s = 1;
+        int e = *max_element(arr.begin(),arr.end());
         int ans =1;
         while(s<=e){
             
-            int mid = s +(e-s)/2;
+            int mid = s+(e-s)/2;
             
-            int canEat = get(arr,mid);
-            
-            
-            if( canEat > k){
+            if(getPerHour(arr,k,mid) > k){
                 
                  s = mid+1;
-            }else{
+            }
+            else{
                 ans = mid;
                 e = mid-1;
             }
