@@ -8,44 +8,41 @@ using namespace std;
 
 class Solution {
   public:
+  
     vector<string>ans;
-   
-    
-    void solve(vector<vector<int>>&mat , int n , int m , int row , int col , string temp,vector<vector<int>>&visited){
+    void solve(vector<vector<int>>&mat ,vector<vector<int>>&visited,string temp, int r , int c , int n , int m  ){
         
+        // safe zone
         
-        if(0 > row || 0 > col || row >= n || col >=m || mat[row][col] ==0 || visited[row][col] == 0) return ;
+        if(r<0|| r>=n || c<0 || c>=m || visited[r][c] == 1 || mat[r][c] ==0){
+            
+            return;
+        }
         
-        
-        if(row == n-1 && col == m-1){
+        if(r==n-1 && c == m-1){
             
             ans.push_back(temp);
             return;
-        } 
+        }
         
-        visited[row][col] =0;
-        solve(mat,n,m,row-1,col,temp+'U',visited);
-        solve(mat,n,m,row+1,col,temp+'D',visited);
-        solve(mat,n,m,row,col+1,temp+'R',visited);
+        visited[r][c] = 1;
         
-        solve(mat,n,m,row,col-1,temp+'L',visited);
+        solve(mat,visited,temp+'U',r-1,c,n,m);
+        solve(mat,visited,temp+'R',r,c+1,n,m);
+        solve(mat,visited,temp+'D',r+1,c,n,m);
+        solve(mat,visited,temp+'L',r,c-1,n,m);
         
-        visited[row][col] =1;
-        
+        visited[r][c] =0;
     }
     vector<string> findPath(vector<vector<int>> &mat) {
         // code here
         int n = mat.size();
         int m = mat[0].size();
-        if (mat[0][0] == 0 || mat[n - 1][n - 1] == 0) {
-            return ans;
-        }
+        vector<vector<int>>visited(n,vector<int>(m,0));
+        if(mat[0][0] ==0) return {};
         
-         vector<vector<int>>visited(n,vector<int>(m,1));
-        solve(mat,mat.size(),mat[0].size(),0,0,"",visited);
-        
+        solve(mat,visited,"",0,0,n,m);
         return ans;
-        
     }
 };
 
@@ -109,4 +106,4 @@ int main() {
     return 0;
 }
 
-// } Driver Code Ends
+// } Driver Code Endshttps://media.geeksforgeeks.org/img-practice/chatIcon-1653561581.svg
