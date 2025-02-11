@@ -6,59 +6,55 @@ using namespace std;
 // } Driver Code Ends
 class Solution {
   public:
-    int kthElement(int k, vector<int>& arr1, vector<int>& arr2) {
+    int kthElement(vector<int>& a, vector<int>& b, int k) {
         // code here
         
+        int s=0;
+        int n1 = a.size();
+        int n2 = b.size();
+         if (n1 + n2 < k) return -1; 
+        int i=0;
+        int j =0;
+        int ans =0;
         
-        int cnt =1;
-        
-        int n = arr1.size();
-        int m = arr2.size();
-        
-        int i=0,j=0;
-    
-        int ele = -1;
-        while(i<n && j<m){
+        while(i<n1 && j < n2){
             
-            int current =0;
             
-            if(arr1[i] < arr2[j]){
+            
+            if(a[i] < b[j]){
                 
-                current = arr1[i];
+                ans =a[i];
                 i++;
-            }
-            else{
                 
-                current = arr2[j];
+            }else{
+                
+                ans = b[j];
                 j++;
             }
             
+            s++;
             
-            if(cnt == k){
-                
-                return current;
-            }
+            if(s==k) return ans;
             
-            cnt++;
-        
+            
         }
         
-        while(i<n && cnt <= k ){
+        while(s!= k && i<n1){
             
-            if(cnt == k ) return arr1[i];
+            ans =a[i];
             i++;
-            cnt++;
+            s++;
         }
         
-          while(j<m && cnt <= k ){
+          while(s!= k && j<n2){
             
-            if(cnt == k ) return arr2[j];
+            ans =b[j];
             j++;
-            cnt++;
+            s++;
         }
         
+        if(s==k) return ans;
         return -1;
-        
     }
 };
 
@@ -75,22 +71,22 @@ int main() {
         cin.ignore();
         string input;
         int num;
-        vector<int> arr1, arr2;
+        vector<int> a, b;
 
         getline(cin, input);
         stringstream s2(input);
         while (s2 >> num) {
-            arr1.push_back(num);
+            a.push_back(num);
         }
 
         getline(cin, input);
         stringstream s3(input);
         while (s3 >> num) {
-            arr2.push_back(num);
+            b.push_back(num);
         }
 
         Solution ob;
-        cout << ob.kthElement(k, arr1, arr2) << endl << "~\n";
+        cout << ob.kthElement(a, b, k) << endl << "~\n";
     }
     return 0;
 }
