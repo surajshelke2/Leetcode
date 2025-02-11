@@ -9,28 +9,25 @@ class Solution {
     bool Search(vector<int>& arr, int k) {
         // Code here
         
-        
-        int s =0;
-        int e = arr.size()-1;
-        
-        int ans =-1;
+        int s=0;
+        int e=arr.size()-1;
+        int ans = -1;
         while(s<=e){
             
-            int mid = s+(e-s)/2;
+            int mid = s +(e-s)/2;
             
             if(arr[mid] == k){
                 
                 return true;
             }
-            else if(arr[mid] > k){
+            else if(k < arr[mid]){
                 
-                 e = mid-1;
-            }else{
-                
-                s = mid+1;
+                e = mid-1;
             }
-            
-           
+            else{
+                
+                s = mid +1;
+            }
         }
         
         return false;
