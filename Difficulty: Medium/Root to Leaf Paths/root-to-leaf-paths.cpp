@@ -133,31 +133,33 @@ struct Node
 
 class Solution {
   public:
+  
     vector<vector<int>>ans;
-    void solve(Node * root ,vector<int>temp){
+    
+    void solve(Node * root , vector<int>temp){
         
-        
-        if(root == nullptr) return ;
-        
-        temp.push_back(root->data);
-        
-        if(root->left == nullptr && root->right == nullptr){
+        if(root == nullptr) return;
+         temp.push_back(root->data);
+        if(root->left==nullptr && root->right==nullptr){
             
             ans.push_back(temp);
             return;
         }
         
-        
        
+        
         solve(root->left,temp);
-      
         solve(root->right,temp);
+        
+     
+        
+        
     }
     vector<vector<int>> Paths(Node* root) {
-        // code here
+        // code herevector<
+        
         vector<int>temp;
         solve(root,temp);
-        
         return ans;
     }
 };
