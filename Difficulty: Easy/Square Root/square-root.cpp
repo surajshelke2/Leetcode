@@ -9,24 +9,19 @@ using namespace std;
 class Solution {
   public:
     int floorSqrt(int n) {
+        // Your code goes here
         
+        int s =1;
+        int e = n/2;
         
-        if(n ==0 || n ==1) return n;
-        int ans =-1;
+        int ans =1;
         
-        int s = 0;
-        int e = n;
-        
-        while(s<=e){
-            
+        while(s <= e){
             
             int mid = s+(e-s)/2;
-              if(mid*mid == n){
-                
-                return mid;
-            }
             
-            if(mid*mid < n){
+            
+            if(mid*mid <= n){
                 
                 ans = mid;
                 s = mid+1;
@@ -39,6 +34,7 @@ class Solution {
         
         return ans;
     }
+    
 };
 
 //{ Driver Code Starts.
