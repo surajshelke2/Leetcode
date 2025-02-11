@@ -9,55 +9,53 @@ using namespace std;
 class Solution {
   public:
   
-    int stduentCount(vector<int>& arr , int k){
+    int getcount(vector<int>& arr , int k ){
         
         
-        int student =1;
-        int pages =0;
-        
-        
+        int stud =1;
+        int pages=0;
         for(int i=0;i<arr.size();i++){
-            
             
             if(pages+arr[i] <= k){
                 
-                pages+=arr[i];
+                pages += arr[i];
                 
-            }else{
+            }
+            else{
                 
-                student++;
-                pages=arr[i];
+                stud++;
+                pages= arr[i];
             }
         }
         
-        return student;
+        return stud;
+        
     }
     int findPages(vector<int> &arr, int k) {
         // code here
          if (arr.size() < k) return -1;
-        
-        int s=*max_element(arr.begin(),arr.end());
-        int e =accumulate(arr.begin(),arr.end(),0);
+        int s = *max_element(arr.begin(),arr.end());
+        int e = accumulate(arr.begin(),arr.end(),0);
         
         int ans = -1;
+        
         while(s<=e){
             
-            int mid = s +(e-s)/2;
+            int mid = s+(e-s)/2;
             
-            int student = stduentCount(arr,mid);
+            int stud = getcount(arr,mid);
             
-            if(student <= k){
-                
-                ans = mid;
-                
-                e =mid-1;
-            }
-            else{
-                
-                s = mid+1;
-            }
+             if(stud <= k){
+                 
+                 ans = mid;
+                 e = mid-1;
+                 
+             }
+             else{
+                 
+                 s = mid+1;
+             }
         }
-        
         
         return ans;
     }
