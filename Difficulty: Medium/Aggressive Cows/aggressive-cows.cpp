@@ -10,51 +10,47 @@ using namespace std;
 
 class Solution {
   public:
-    int canSet(vector<int>& stalls ,int dist ,int k){
+  
+    int canSet(vector<int>& stalls , int k, int dist){
         
-         int cow = 1;
-         int lastPlaced = stalls[0];
-         
-         for(int i=1;i<stalls.size();i++){
-             
-             if(stalls[i]-lastPlaced >= dist){
-                 
-                 cow++;
-                 lastPlaced = stalls[i];
-             }
-             
-             
-             if(cow == k){
-                 
-                 return true;
-             }
-         }
-         return false;
+        int cow =1;
+        int lastP= stalls[0];
+        
+        for(int i=1;i<stalls.size();i++){
+            
+            if(stalls[i] - lastP >= dist){
+                
+                cow++;
+                lastP = stalls[i];
+            }
+            
+            if(cow == k) return true;
+        }
+        
+        return false;
     }
+
     int aggressiveCows(vector<int> &stalls, int k) {
 
         // Write your code here
-         int n = stalls.size();
-         if(n < k) return 0;
+        
         sort(stalls.begin(),stalls.end());
-       
-        int s = 1;
-        int e = stalls[n-1] - stalls[0];
-        int ans = 0;
+        int  n = stalls.size();
+        int s =1;
+        int e =stalls[n-1]-stalls[0];
+        int ans =0;
         while(s<=e){
             
+            int mid = s+(e-s)/2;
             
-            int mid = s + (e-s)/2;
-            
-            if(canSet(stalls,mid,k)){
+            if(canSet(stalls,k,mid)){
                 
-                ans = mid;
-                s = mid+1;
+                 ans = mid;
+                 s = mid+1;
+            }else{
+                
+                 e= mid-1;
             }
-             else{
-                 
-                e = mid-1;
-             }
         }
         
         return ans;
