@@ -7,28 +7,31 @@ using namespace std;
 
 class Solution{
     public:
-    int searchInsertK(vector<int>Arr, int N, int k)
+    int searchInsertK(vector<int>arr, int N, int k)
     {
-        // code here
         
-        int s =0;
+        
+        int s=0;
         int e = N-1;
-        int ans=N;
+        int ans =-1;
+        if(arr[0] > k) return 0;
+        if(arr[e] < k) return N;
+        
         while(s<=e){
             
             
             int mid = s+(e-s)/2;
             
-           
-           if(Arr[mid] >= k){
-                
-                 ans = mid;
-                
-                e = mid - 1;
+            
+            if(arr[mid] >= k){
+                ans = mid;
+                e = mid-1;
             }
             else{
                 
                 s = mid+1;
+              
+                
             }
         }
         
